@@ -32,19 +32,19 @@ class RockAdmin(admin.ModelAdmin):
 
 @admin.register(CommentBeach)
 class BeachCommentAdmin(admin.ModelAdmin):
-    list_display = ('name', 'email', 'publish')
-    list_filter = ( 'publish',)
+    list_display = ('name', 'email', 'publish', 'active')
+    list_filter = ( 'publish', 'active')
     search_fields = ('name', 'email', 'com', 'beach')
 
 @admin.register(CommentRock)
 class RockCommentAdmin(admin.ModelAdmin):
-    list_display = ('name', 'email', 'publish')
-    list_filter = ( 'publish',)
+    list_display = ('name', 'email', 'publish', 'active')
+    list_filter = ( 'publish','active')
     search_fields = ('name', 'email', 'com', 'rock')
 
 
 @admin.register(CommentHotel)
 class HotelCommentAdmin(admin.ModelAdmin):
-    list_display = ('name', 'email', 'publish')
-    list_filter = ( 'publish',)
-    search_fields = ('name', 'email', 'com', 'hotel') 
+    list_display = ('name', 'email', 'publish', 'active')
+    list_filter = ( 'publish','active')
+    search_fields = ('name', 'email', 'com', 'hotel')

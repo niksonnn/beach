@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
 from django.utils import timezone
+from taggit.managers import TaggableManager
 
 
 class Beach(models.Model):
@@ -23,6 +24,7 @@ class Beach(models.Model):
     ogrn= models.IntegerField(verbose_name = 'ОГРН')
     category = models.CharField(max_length=250, verbose_name = 'Категория')
     slug = models.SlugField(max_length=250)
+    tags = TaggableManager()
 
     class Meta:
         ordering = ('name',)
@@ -57,6 +59,7 @@ class Rock(models.Model):
     ogrn= models.IntegerField(verbose_name = 'ОГРН')
     category = models.CharField(max_length=250, verbose_name = 'Категория')
     slug = models.SlugField(max_length=250)
+    tags = TaggableManager()
 
     class Meta:
         ordering = ('name',)
@@ -87,6 +90,7 @@ class Hotel(models.Model):
     ogrn= models.CharField(max_length=150, verbose_name = 'ОГРН')
     category = models.CharField(max_length=250, verbose_name = 'Категория')
     slug = models.SlugField(max_length=250)
+    tags = TaggableManager()
 
     class Meta:
         ordering = ('name',)
@@ -104,8 +108,9 @@ class CommentBeach(models.Model):
     name = models.CharField(max_length=100, verbose_name = 'Имя')
     email = models.EmailField()
     com = models.TextField(verbose_name = 'Комментарий')
-    #image = models.ImageField(blank=True, verbose_name = 'Изображение')
+    image = models.ImageField(blank=True, verbose_name = 'Изображение')
     publish = models.DateTimeField(auto_now_add=True, verbose_name = 'Опубликовано' )
+    active = models.BooleanField(default = True)
 
     class Meta:
         ordering = ('-publish',)
@@ -121,8 +126,9 @@ class CommentRock(models.Model):
     name = models.CharField(max_length=100, verbose_name = 'Имя')
     email = models.EmailField()
     com = models.TextField(verbose_name = 'Комментарий')
-    #image = models.ImageField(blank=True, verbose_name = 'Изображение')
+    image = models.ImageField(blank=True, verbose_name = 'Изображение')
     publish = models.DateTimeField(auto_now_add=True, verbose_name = 'Опубликовано' )
+    active = models.BooleanField(default = True)
 
     class Meta:
         ordering = ('-publish',)
@@ -137,8 +143,9 @@ class CommentHotel(models.Model):
     name = models.CharField(max_length=100, verbose_name = 'Имя')
     email = models.EmailField()
     com = models.TextField(verbose_name = 'Комментарий')
-    #image = models.ImageField(blank=True, verbose_name = 'Изображение')
+    image = models.ImageField(blank=True, verbose_name = 'Изображение')
     publish = models.DateTimeField(auto_now_add=True, verbose_name = 'Опубликовано' )
+    active = models.BooleanField(default = True)
 
     class Meta:
         ordering = ('-publish',)
