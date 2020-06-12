@@ -30,7 +30,7 @@ class Beach(models.Model):
 
 
     def get_absolute_url(self):
-        return reverse('opendata:detail_beach', args=[self.slug])
+        return reverse('sunrise:detail_beach', args=[self.slug])
 
 
 
