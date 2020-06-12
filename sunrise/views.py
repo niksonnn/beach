@@ -27,8 +27,9 @@ def detail_beach(request, beach):
             new_comment.beach = beach
             new_comment.save()
     else:
-        comment_form = CommentForm()
-    context = {'beach': beach, 'comments': comments, 'new_comment': new_comment}
+        comment_form = BeachCommentForm()
+    context = {'beach': beach, 'comments': comments, 'new_comment': new_comment,
+                                                'comment_form': comment_form}
     return render(request, 'sunrise/beach/detail.html', context)
 
 def list_rock(request):
@@ -52,11 +53,12 @@ def detail_rock(request, rock):
         comment_form = RockCommentForm(data=request.POST)
         if comment_form.is_valid():
             new_comment = comment_form.save(commit=False)
-            new_comment.beach = rock
+            new_comment.rock = rock
             new_comment.save()
     else:
-        comment_form = CommentForm()
-    context = {'rock': rock, 'comments': comments, 'new_comment': new_comment}
+        comment_form = RockCommentForm()
+    context = {'rock': rock, 'comments': comments, 'new_comment': new_comment,
+                                                'comment_form': comment_form,}
     return render(request, 'sunrise/rock/detailrock.html', context)
 
 def list_hotel(request):
@@ -80,11 +82,12 @@ def detail_hotel(request, hotel):
         comment_form = HotelCommentForm(data=request.POST)
         if comment_form.is_valid():
             new_comment = comment_form.save(commit=False)
-            new_comment.beach = hotel
+            new_comment.hotel = hotel
             new_comment.save()
     else:
-        comment_form = CommentForm()
-    context = {'hotel': hotel, 'comments': comments, 'new_comment': new_comment}
+        comment_form = HotelCommentForm()
+    context = {'hotel': hotel, 'comments': comments, 'new_comment': new_comment,
+                                            'comment_form': comment_form,}
     return render(request, 'sunrise/hotel/detailhotel.html', context)
 
 def mess(request):

@@ -104,7 +104,7 @@ class CommentBeach(models.Model):
     name = models.CharField(max_length=100, verbose_name = 'Имя')
     email = models.EmailField()
     com = models.TextField(verbose_name = 'Комментарий')
-    image = models.ImageField(blank=True, verbose_name = 'Изображение')
+    #image = models.ImageField(blank=True, verbose_name = 'Изображение')
     publish = models.DateTimeField(auto_now_add=True, verbose_name = 'Опубликовано' )
 
     class Meta:
@@ -121,7 +121,7 @@ class CommentRock(models.Model):
     name = models.CharField(max_length=100, verbose_name = 'Имя')
     email = models.EmailField()
     com = models.TextField(verbose_name = 'Комментарий')
-    image = models.ImageField(blank=True, verbose_name = 'Изображение')
+    #image = models.ImageField(blank=True, verbose_name = 'Изображение')
     publish = models.DateTimeField(auto_now_add=True, verbose_name = 'Опубликовано' )
 
     class Meta:
@@ -137,7 +137,7 @@ class CommentHotel(models.Model):
     name = models.CharField(max_length=100, verbose_name = 'Имя')
     email = models.EmailField()
     com = models.TextField(verbose_name = 'Комментарий')
-    image = models.ImageField(blank=True, verbose_name = 'Изображение')
+    #image = models.ImageField(blank=True, verbose_name = 'Изображение')
     publish = models.DateTimeField(auto_now_add=True, verbose_name = 'Опубликовано' )
 
     class Meta:
