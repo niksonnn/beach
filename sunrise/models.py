@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 class Beach(models.Model):
     #name 	full_name 	address 	phone 	email 	accredited_organization
@@ -26,6 +27,12 @@ class Beach(models.Model):
 
     def __str__(self):
         return self.name
+
+
+    def get_absolute_url(self):
+        return reverse('opendata:detail_beach', args=[self.slug])
+
+
 
 
 
