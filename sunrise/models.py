@@ -63,6 +63,9 @@ class Rock(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse('sunrise:detail_rock', args=[self.slug])
+
 
 class Hotel(models.Model):
     #name 	full_name 	address 	phone 	email 	accredited_organization
@@ -89,3 +92,6 @@ class Hotel(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('sunrise:detail_hotel', args=[self.slug])
