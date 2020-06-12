@@ -3,6 +3,7 @@ from .models import Beach, Rock, Hotel, CommentBeach, CommentRock, CommentHotel
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .forms import EmailForm, BeachCommentForm, RockCommentForm, HotelCommentForm
 from taggit.models import Tag
+from django.db.models import Count
 
 def list_beach(request, tag_slug = None):
     beachs_all = Beach.objects.all()
@@ -33,8 +34,12 @@ def detail_beach(request, beach):
             new_comment.save()
     else:
         comment_form = BeachCommentForm()
+    beach_tags_ids = beach.tags.values_list('id', flat=True)
+    similar_beachs = Beach.objects.filter(tags__in=beach_tags_ids).exclude(id=beach.id)
+    similar_beachs = similar_beachs.annotate(same_tags=Count('tags')).order_by('-same_tags')[:4]
+
     context = {'beach': beach, 'comments': comments, 'new_comment': new_comment,
-                                    'comment_form': comment_form}
+                'comment_form': comment_form, 'similar_beachs': similar_beachs}
     return render(request, 'sunrise/beach/detail.html', context)
 
 def list_rock(request, tag_slug = None):
@@ -66,8 +71,11 @@ def detail_rock(request, rock):
             new_comment.save()
     else:
         comment_form = RockCommentForm()
+    rock_tags_ids = rock.tags.values_list('id', flat=True)
+    similar_rocks = Rock.objects.filter(tags__in=rock_tags_ids).exclude(id=rock.id)
+    similar_rocks = similar_rocks.annotate(same_tags=Count('tags')).order_by('-same_tags')[:4]
     context = {'rock': rock, 'comments': comments, 'new_comment': new_comment,
-                                                'comment_form': comment_form,}
+                'comment_form': comment_form, 'similar_rocks':similar_rocks}
     return render(request, 'sunrise/rock/detailrock.html', context)
 
 def list_hotel(request, tag_slug = None):
@@ -84,6 +92,7 @@ def list_hotel(request, tag_slug = None):
         hotels = paginator.page(1)
     except EmptyPage:
         hotels = paginator.page(paginator.num_pages)
+
     context = {'page': page, 'hotels': hotels, 'tag':tag}
     return render(request, 'sunrise/hotel/listhotel.html', context)
 
@@ -99,8 +108,11 @@ def detail_hotel(request, hotel):
             new_comment.save()
     else:
         comment_form = HotelCommentForm()
+    hotel_tags_ids = hotel.tags.values_list('id', flat=True)
+    similar_hotels = Hotel.objects.filter(tags__in=hotel_tags_ids).exclude(id=hotel.id)
+    similar_hotels = similar_hotels.annotate(same_tags=Count('tags')).order_by('-same_tags')[:4]
     context = {'hotel': hotel, 'comments': comments, 'new_comment': new_comment,
-                                            'comment_form': comment_form,}
+            'comment_form': comment_form, 'similar_hotels': similar_hotels}
     return render(request, 'sunrise/hotel/detailhotel.html', context)
 
 def mess(request):
@@ -115,5 +127,5 @@ def mess(request):
         flug = True
     else:
         form = EmailForm()
-        context ={'form': form, 'flug': flug}
+    context ={'form': form, 'flug': flug}
     return render(request, 'sunrise/mess.html', context)
