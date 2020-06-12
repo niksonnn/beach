@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
+from django.utils import timezone
 
 
 class Beach(models.Model):
@@ -95,3 +96,52 @@ class Hotel(models.Model):
 
     def get_absolute_url(self):
         return reverse('sunrise:detail_hotel', args=[self.slug])
+
+class CommentBeach(models.Model):
+    #Comments users for Beachs
+    beach = models.ForeignKey(Beach, on_delete=models.CASCADE, related_name='comments'))
+    #user = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100, verbose_name = Имя)
+    email = models.EmailField()
+    com = models.TextField(verbose_name = Комментарий)
+    image = ImageFields(blank=True, verbose_name = Изображение)
+    publish = models.DateTimeField(auto_now_add=True, verbose_name = Опубликовано )
+
+    class Meta:
+        ordering = ('-publish',)
+
+    def __str__(self):
+        return 'Комментарий от {}'.format(self.name)
+
+class CommentRock(models.Model):
+    #Comments users for Rocks
+    rock = models.ForeignKey(Rock, on_delete=models.CASCADE,
+                related_name='comments')
+    #user = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100, verbose_name = Имя)
+    email = models.EmailField()
+    com = models.TextField(verbose_name = Комментарий)
+    image = ImageFields(blank=True, verbose_name = Изображение)
+    publish = models.DateTimeField(auto_now_add=True, verbose_name = Опубликовано )
+
+    class Meta:
+        ordering = ('-publish',)
+
+    def __str__(self):
+        return 'Комментарий от {}'.format(self.name)
+
+class CommentHotel(models.Model):
+    #Comments users for Hotels
+    hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE, related_name='comments'))
+    #user = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100, verbose_name = Имя)
+    email = models.EmailField()
+    com = models.TextField(verbose_name = Комментарий)
+    image = ImageFields(blank=True, verbose_name = Изображение)
+    publish = models.DateTimeField(auto_now_add=True, verbose_name = Опубликовано )
+
+    class Meta:
+        ordering = ('-publish',)
+
+    def __str__(self):
+        return 'Комментарий от {}'.format(self.name)

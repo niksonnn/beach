@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Beach, Rock, Hotel
+from .models import Beach, Rock, Hotel, CommentBeach, CommentRock, CommentHotel
 # Register your models here.
 
 @admin.register(Beach)
@@ -28,3 +28,23 @@ class RockAdmin(admin.ModelAdmin):
         search_fields = ('name', 'region', 'category', 'ogrn', 'inn')
         prepopulated_fields = {'slug': ('name',)}
         ordering = ('name', 'category',)
+
+
+@admin.register(CommentBeach)
+class BeachCommentAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'publish')
+    list_filter = ( 'publish',)
+    search_fields = ('name', 'email', 'com', 'beach')
+
+@admin.register(CommentRock)
+class RockCommentAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'publish')
+    list_filter = ( 'publish',)
+    search_fields = ('name', 'email', 'com', 'rock')
+
+
+@admin.register(CommentHotel)
+class HotelCommentAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'publish')
+    list_filter = ( 'publish',)
+    search_fields = ('name', 'email', 'com', 'hotel') 
