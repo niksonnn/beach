@@ -5,8 +5,6 @@ filename = r'/home/nik/data/datasun4.json'
 with open(filename, 'r', encoding='utf-8') as fh: #открываем файл на чтение
     data = json.load(fh)
 
-
-
 for i in data:
     beach = Beach.objects.create(
         name  = data[i]['name'],
@@ -21,12 +19,12 @@ for i in data:
         inn = data[i]['inn'],
         ogrn = data[i]['ogrn'],
         category = data[i]['category'],
-        slug = data[i]['ogrn']
+        slug = "beach_{}".format(i)
     )
     beach.save()
 
 
-from .models import Beach, Rock, Hotel
+from sunrise.models import Beach, Rock, Hotel
 
 
 
@@ -54,7 +52,7 @@ for i in data:
         inn = data[i]['inn'],
         ogrn = data[i]['ogrn'],
         category = data[i]['category'],
-        slug = data[i]['ogrn']
+        slug = "rock_{}".format(i)
         )
     rock.save()
 
@@ -88,6 +86,11 @@ for i in data:
         inn = data[i]['inn'],
         ogrn = data[i]['ogrn'],
         category = data[i]['category'],
-        slug = data[i]['ogrn']
+        slug = "hotel_{}".format(i)
         )
     hotel.save()
+
+
+#all = Hotel.objects.all()
+#for i in all:
+#    i.delete()

@@ -49,9 +49,9 @@ def list_hotel(request):
     except EmptyPage:
         hotels = paginator.page(paginator.num_pages)
     context = {'page': page, 'hotels': hotels}
-    return render(request, 'sunrise/rock/listhotel.html', context)
+    return render(request, 'sunrise/hotel/listhotel.html', context)
 
-def detail_rock(request, hotel):
-    rock = get_object_or_404(Hotel, slug= rock)
+def detail_hotel(request, hotel):
+    hotel = get_object_or_404(Hotel, slug= hotel)
     context = {'hotel': hotel}
-    return render(request, 'sunrise/rock/detailhotel.html', context)
+    return render(request, 'sunrise/hotel/detailhotel.html', context)
