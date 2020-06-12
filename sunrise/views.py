@@ -46,16 +46,16 @@ def list_rock(request):
 
 def detail_rock(request, rock):
     rock = get_object_or_404(Rock, slug= rock)
-        comments = rock.comments.all()
-        new_comment = None
-        if request.method == 'POST':
-            comment_form = RockCommentForm(data=request.POST)
-            if comment_form.is_valid():
-                new_comment = comment_form.save(commit=False)
-                new_comment.beach = rock
-                new_comment.save()
-        else:
-            comment_form = CommentForm()
+    comments = rock.comments.all()
+    new_comment = None
+    if request.method == 'POST':
+        comment_form = RockCommentForm(data=request.POST)
+        if comment_form.is_valid():
+            new_comment = comment_form.save(commit=False)
+            new_comment.beach = rock
+            new_comment.save()
+    else:
+        comment_form = CommentForm()
     context = {'rock': rock, 'comments': comments, 'new_comment': new_comment}
     return render(request, 'sunrise/rock/detailrock.html', context)
 

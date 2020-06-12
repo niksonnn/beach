@@ -99,13 +99,13 @@ class Hotel(models.Model):
 
 class CommentBeach(models.Model):
     #Comments users for Beachs
-    beach = models.ForeignKey(Beach, on_delete=models.CASCADE, related_name='comments'))
+    beach = models.ForeignKey(Beach, on_delete=models.CASCADE, related_name='comments')
     #user = models.ForeignKey(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=100, verbose_name = Имя)
+    name = models.CharField(max_length=100, verbose_name = 'Имя')
     email = models.EmailField()
-    com = models.TextField(verbose_name = Комментарий)
-    image = ImageFields(blank=True, verbose_name = Изображение)
-    publish = models.DateTimeField(auto_now_add=True, verbose_name = Опубликовано )
+    com = models.TextField(verbose_name = 'Комментарий')
+    image = models.ImageField(blank=True, verbose_name = 'Изображение')
+    publish = models.DateTimeField(auto_now_add=True, verbose_name = 'Опубликовано' )
 
     class Meta:
         ordering = ('-publish',)
@@ -118,11 +118,11 @@ class CommentRock(models.Model):
     rock = models.ForeignKey(Rock, on_delete=models.CASCADE,
                 related_name='comments')
     #user = models.ForeignKey(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=100, verbose_name = Имя)
+    name = models.CharField(max_length=100, verbose_name = 'Имя')
     email = models.EmailField()
-    com = models.TextField(verbose_name = Комментарий)
-    image = ImageFields(blank=True, verbose_name = Изображение)
-    publish = models.DateTimeField(auto_now_add=True, verbose_name = Опубликовано )
+    com = models.TextField(verbose_name = 'Комментарий')
+    image = models.ImageField(blank=True, verbose_name = 'Изображение')
+    publish = models.DateTimeField(auto_now_add=True, verbose_name = 'Опубликовано' )
 
     class Meta:
         ordering = ('-publish',)
@@ -132,13 +132,13 @@ class CommentRock(models.Model):
 
 class CommentHotel(models.Model):
     #Comments users for Hotels
-    hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE, related_name='comments'))
+    hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE, related_name='comments')
     #user = models.ForeignKey(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=100, verbose_name = Имя)
+    name = models.CharField(max_length=100, verbose_name = 'Имя')
     email = models.EmailField()
-    com = models.TextField(verbose_name = Комментарий)
-    image = ImageFields(blank=True, verbose_name = Изображение)
-    publish = models.DateTimeField(auto_now_add=True, verbose_name = Опубликовано )
+    com = models.TextField(verbose_name = 'Комментарий')
+    image = models.ImageField(blank=True, verbose_name = 'Изображение')
+    publish = models.DateTimeField(auto_now_add=True, verbose_name = 'Опубликовано' )
 
     class Meta:
         ordering = ('-publish',)
