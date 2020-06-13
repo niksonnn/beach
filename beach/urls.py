@@ -17,13 +17,10 @@ from django.contrib import admin
 from django.urls import path, include
 
 
-sitemaps = {'beachs': BeachSitemap,
-            'rocks': RockSitemap,
-            'hotels': HotelSitemap  }
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('sunrise/', include('sunrise.urls', namespace = 'sunrise')),
-
-
+    
 ]
