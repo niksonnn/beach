@@ -19,7 +19,8 @@ for i in data:
         inn = data[i]['inn'],
         ogrn = data[i]['ogrn'],
         category = data[i]['category'],
-        slug = "beach_{}".format(i)
+        slug = "beach_{}".format(i),
+        tags = "{}, {}".format(data[i]['region'], data[i]['category'])
     )
     beach.save()
 
@@ -52,7 +53,8 @@ for i in data:
         inn = data[i]['inn'],
         ogrn = data[i]['ogrn'],
         category = data[i]['category'],
-        slug = "rock_{}".format(i)
+        slug = "rock_{}".format(i),
+        tags = "{}, {}".format(data[i]['region'], data[i]['category'])
         )
     rock.save()
 
@@ -86,7 +88,8 @@ for i in data:
         inn = data[i]['inn'],
         ogrn = data[i]['ogrn'],
         category = data[i]['category'],
-        slug = "hotel_{}".format(i)
+        slug = "hotel_{}".format(i),
+        tags = "{}, {}".format(data[i]['region'], data[i]['category'])
         )
     hotel.save()
 

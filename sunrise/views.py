@@ -11,7 +11,7 @@ def list_beach(request, tag_slug = None):
     if tag_slug:
         tag = get_object_or_404(Tag, slug=tag_slug)
         object_list = object_list.filter(tags__in=[tag])
-    paginator = Paginator(beachs_all, 10)
+    paginator = Paginator(beachs_all, 4)
     page = request.GET.get('page')
     try:
         beachs = paginator.page(page)
@@ -48,7 +48,7 @@ def list_rock(request, tag_slug = None):
     if tag_slug:
         tag = get_object_or_404(Tag, slug=tag_slug)
         object_list = object_list.filter(tags__in=[tag])
-    paginator = Paginator(rock_all, 10)
+    paginator = Paginator(rock_all, 4)
     page = request.GET.get('page')
     try:
         rocks = paginator.page(page)
@@ -84,7 +84,7 @@ def list_hotel(request, tag_slug = None):
     if tag_slug:
         tag = get_object_or_404(Tag, slug=tag_slug)
         object_list = object_list.filter(tags__in=[tag])
-    paginator = Paginator(hotel_all, 10)
+    paginator = Paginator(hotel_all, 4)
     page = request.GET.get('page')
     try:
         hotels = paginator.page(page)

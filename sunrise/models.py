@@ -24,7 +24,9 @@ class Beach(models.Model):
     ogrn= models.IntegerField(verbose_name = 'ОГРН')
     category = models.CharField(max_length=250, verbose_name = 'Категория')
     slug = models.SlugField(max_length=250)
-    tags = TaggableManager()
+    tags = TaggableManager(blank = True)
+    image = models.ImageField(upload_to='images/beach/', blank = True,
+                                                verbose_name = 'Изображение')
 
     class Meta:
         ordering = ('name',)
@@ -59,7 +61,9 @@ class Rock(models.Model):
     ogrn= models.IntegerField(verbose_name = 'ОГРН')
     category = models.CharField(max_length=250, verbose_name = 'Категория')
     slug = models.SlugField(max_length=250)
-    tags = TaggableManager()
+    tags = TaggableManager(blank = True)
+    image = models.ImageField(upload_to='images/rock/', blank = True,
+                                                verbose_name = 'Изображение')
 
     class Meta:
         ordering = ('name',)
@@ -74,7 +78,7 @@ class Rock(models.Model):
 class Hotel(models.Model):
     #name 	full_name 	address 	phone 	email 	accredited_organization
     #region 	certificate_number 	registrated_num 	inn 	ogrn 	category
-    name  = models.CharField(max_length=250, verbose_name = 'Название горнолыжной трассы')
+    name  = models.CharField(max_length=250, verbose_name = 'Гостиницы')
     full_name = models.TextField(verbose_name = 'Полное название')
     address = models.CharField(max_length=250, verbose_name = 'Адрес')
     phone = models.CharField(max_length=50, verbose_name = 'Телефон')
@@ -90,7 +94,9 @@ class Hotel(models.Model):
     ogrn= models.CharField(max_length=150, verbose_name = 'ОГРН')
     category = models.CharField(max_length=250, verbose_name = 'Категория')
     slug = models.SlugField(max_length=250)
-    tags = TaggableManager()
+    tags = TaggableManager(blank = True)
+    image = models.ImageField(upload_to='images/hotel/', blank = True,
+                                                verbose_name = 'Изображение')
 
     class Meta:
         ordering = ('name',)
@@ -108,7 +114,7 @@ class CommentBeach(models.Model):
     name = models.CharField(max_length=100, verbose_name = 'Имя')
     email = models.EmailField()
     com = models.TextField(verbose_name = 'Комментарий')
-    image = models.ImageField(blank=True, verbose_name = 'Изображение')
+    image = models.ImageField(upload_to='images/beach/comments/', blank=True, verbose_name = 'Изображение')
     publish = models.DateTimeField(auto_now_add=True, verbose_name = 'Опубликовано' )
     active = models.BooleanField(default = True)
 
@@ -126,7 +132,7 @@ class CommentRock(models.Model):
     name = models.CharField(max_length=100, verbose_name = 'Имя')
     email = models.EmailField()
     com = models.TextField(verbose_name = 'Комментарий')
-    image = models.ImageField(blank=True, verbose_name = 'Изображение')
+    image = models.ImageField(upload_to='images/rock/comments/', blank=True, verbose_name = 'Изображение')
     publish = models.DateTimeField(auto_now_add=True, verbose_name = 'Опубликовано' )
     active = models.BooleanField(default = True)
 
@@ -143,7 +149,7 @@ class CommentHotel(models.Model):
     name = models.CharField(max_length=100, verbose_name = 'Имя')
     email = models.EmailField()
     com = models.TextField(verbose_name = 'Комментарий')
-    image = models.ImageField(blank=True, verbose_name = 'Изображение')
+    image = models.ImageField(upload_to='images/hotel/comments/', blank=True, verbose_name = 'Изображение')
     publish = models.DateTimeField(auto_now_add=True, verbose_name = 'Опубликовано' )
     active = models.BooleanField(default = True)
 

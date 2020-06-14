@@ -21,8 +21,8 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('sunrise/', include('sunrise.urls', namespace = 'sunrise')),
     path('account/', include('account.urls')),
+    path('sunrise/', include('sunrise.urls', namespace = 'sunrise')),
     path('social-auth/', include('social_django.urls', namespace='social')),
 
 ]
