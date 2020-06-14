@@ -1,9 +1,10 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Beach, Rock, Hotel, CommentBeach, CommentRock, CommentHotel
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from .forms import EmailForm, BeachCommentForm, RockCommentForm, HotelCommentForm
+from .forms import EmailForm, BeachCommentForm, RockCommentForm, HotelCommentForm, SearchForm
 from taggit.models import Tag
 from django.db.models import Count
+from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank, TrigramSimilarity
 
 def list_beach(request, tag_slug = None):
     beachs_all = Beach.objects.all()
@@ -129,3 +130,52 @@ def mess(request):
         form = EmailForm()
     context ={'form': form, 'flug': flug}
     return render(request, 'sunrise/mess.html', context)
+
+
+def beach_search(request):
+    form = SearchForm()
+    query = None
+    results = []
+    if 'query' in request.GET:
+        form = SearchForm(request.GET)
+        if form.is_valid():
+            query = form.cleaned_data['query']
+            results = Beach.objects.annotate(
+                similarity=TrigramSimilarity('category', query),
+            ).filter(similarity__gt=0.3).order_by('-similarity')
+
+    context = {'form': form, 'query': query, 'results': results}
+    return render(request,'sunrise/beach/search_beach.html', context)
+
+
+
+def rock_search(request):
+    form = SearchForm()
+    query = None
+    results = []
+    if 'query' in request.GET:
+        form = SearchForm(request.GET)
+        if form.is_valid():
+            query = form.cleaned_data['query']
+            results = Rock.objects.annotate(
+                similarity=TrigramSimilarity('category', query),
+            ).filter(similarity__gt=0.3).order_by('-similarity')
+
+    context = {'form': form, 'query': query, 'results': results}
+    return render(request,'sunrise/rock/search_rock.html', context)
+
+
+def hotel_search(request):
+    form = SearchForm()
+    query = None
+    results = []
+    if 'query' in request.GET:
+        form = SearchForm(request.GET)
+        if form.is_valid():
+            query = form.cleaned_data['query']
+            results = Hotel.objects.annotate(
+                similarity=TrigramSimilarity('region', query),
+                ).filter(similarity__gt=0.3).order_by('-similarity')
+
+    context = {'form': form, 'query': query, 'results': results}
+    return render(request,'sunrise/hotel/search_hotel.html', context)
